@@ -1,5 +1,6 @@
 @section('navbar')
 <div class="header frontpage" style="background-color:#EFF3F8;">
+  <div class="container">
   <nav class="navbar navbar-expand-lg navbar-light " style="height:80px;">
     <a class="navbar-brand" href="#">EMPLOYMENT.COM</a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -35,4 +36,5 @@
       </form>
     </div>
   </nav>
+  </div>
 </div>
