@@ -13,6 +13,8 @@ class AdminController extends Controller{
 			'email'=>'required|min:5|max:50',
 			'password'=>'required|min:6|max:30']);*/
 
+
+
 			
 	}
 
