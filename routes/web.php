@@ -21,3 +21,7 @@ Route::get('/contact', function () {
     return view('AdminPage');
 });
 
+Route::get('/register', function () {
+    return view('Registration');
+});
+
