@@ -54,12 +54,44 @@
      			<td>877777777</td>
      			<td>erden@gmail.com</td>
 	     	</tr>
-	  
 	  </tbody>
 	</table>
 </div>
+
+
+<div class="container  bg-light">
+  <div class="col-md-12 align-items-center">
+    <h2 style="padding: 30px 0 0 0">Companies</h2>
+    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#basicExampleModal1">
+  Add new
+</button>
+    </div>
+    <br>
+    <table class="table ">
+	  <thead>
+	    <tr>
+	      <th scope="col">#</th>
+	      <th scope="col">Name</th>
+	      <th scope="col">Address</th>
+	      <th scope="col">City</th>
+	      <th scope="col">Email</th>
+	      <th scope="col">Operations</th>
+	    </tr>
+	  </thead>
+	  <tbody>
+	  	<tr>
+ 			<td>1</td>
+ 			<td>Google</td>
+ 			<td>Almaty Manasa 34</td>
+ 			<td>Kazakhstan</td>
+ 			<td>google@gmail.com</td>
+ 			<td><button class="bnt btn-warning">Edit</button></td>
+	     </tr>
+	  </tbody>
+</table>
+</div>
 	
-	
+
 @endsection
 
 
