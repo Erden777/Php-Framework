@@ -1,7 +1,6 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -24,4 +23,7 @@ Route::get('/contact', function () {
 Route::get('/register', function () {
     return view('Registration');
 });
+
+Route::post('/register/submit' ,'AdminController@register')->name('register-form');
+
 
