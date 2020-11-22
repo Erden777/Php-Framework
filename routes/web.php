@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\AdminController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -18,12 +19,20 @@ Route::get('/', function () {
 
 Route::get('/contact', function () {
     return view('AdminPage');
-});
+})->name('contact');
 
 Route::get('/register', function () {
     return view('Registration');
 });
 
-Route::post('/register/submit' ,'AdminController@register')->name('register-form');
+Route::post('/register/submit' ,[AdminController::class,'register'])->name('register-form');
+
+Route::get('/admin' ,[AdminController::class,'index'])->name('admin-index');
+
+Route::get('/admin/{id}' ,
+	[AdminController::class,'detailsUser']
+)->name('user_details');
+
+Route::post('/addCompany' ,[AdminController::class,'AddCompany'])->name('addcompany');
 
 
