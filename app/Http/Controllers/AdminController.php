@@ -53,6 +53,13 @@ class AdminController extends Controller{
 		return redirect()->route('admin-index');
 	}
 
+	public function EditCompany($id){
+		$company = new Company;
+
+		return view('EditCompany' , ['company'=>$company->find($id)]);
+
+	}
+
 
 
 }
