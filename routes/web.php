@@ -26,13 +26,15 @@ Route::get('/profile' ,[UserAuthController::class,'ProfilePage'])->name('Profile
 
 Route::get('/loginSubmit' ,[UserAuthController::class,'loginSubmit'])->name('LogininSubmit');
 
+Route::get('profile/logout' , [UserAuthController::class, 'Logout'])->name('Logout');
+
 Route::get('/admin' ,[AdminController::class,'index'])->name('admin-index');
 
 Route::get('/admin/{id}' ,
 	[AdminController::class,'detailsUser']
 )->name('user_details');
 
-Route::post('/Edit/{id}' ,
+Route::post('/Edit/{id}' , 
 	[UserAuthController::class,'UpdateUser']
 )->name('Update-User');
 
@@ -51,6 +53,9 @@ Route::get('/admin/edit/{id}/delete' ,
 	[AdminController::class,'DeleteCompany']
 )->name('Delete-Company');
 
+Route::get('/vacancy/{id}' ,
+	[AdminController::class,'getVacancyByCompany']
+)->name('getCompany');
 
 
 

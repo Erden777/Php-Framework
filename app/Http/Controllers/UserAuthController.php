@@ -48,14 +48,12 @@ class UserAuthController extends Controller
         return view('UserLogin');
     }
 
-
     public function ProfilePage(){
         if(session()->get('user')!=null){
              return view('ProfilePage');
         }else{
             return redirect()->route('Loginin');
         }
-
     }
 
     public function UpdateUser($id , Request $req){
@@ -69,6 +67,11 @@ class UserAuthController extends Controller
         $user->save();
 
         return redirect()->route('user_details' , $id)->with('success' , 'Success edited');  
+    }
+
+    public function Logout(){
+        session()->forget('user');
+        return redirect()->route('Loginin');
     }
 
 }

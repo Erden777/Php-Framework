@@ -9,4 +9,9 @@ class Company extends Model
 {
     use HasFactory;
     public $timestamps = false;
+    protected $table = 'companies';
+
+    public function getVacancy(){
+    	return $this->hasMany(Vacancy::class);
+    }
 }

@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Http\Requests\AdminRequest;
 use App\Models\User;
 use App\Models\Company;
+use App\Models\Vacancy;
 use routes\web;
 
 class AdminController extends Controller{
@@ -62,6 +63,13 @@ class AdminController extends Controller{
 		return redirect()->route('admin-index')->with('success' , 'Success deleted');
 	}
 
+
+
+	public function getVacancyByCompany($id){
+		$vacancy=Vacancy::find($id);
+		$company = Company::find($vacancy->company_id);
+		return dd($company);
+	}
 
 
 }
