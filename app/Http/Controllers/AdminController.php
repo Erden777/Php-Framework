@@ -10,18 +10,7 @@ use routes\web;
 
 class AdminController extends Controller{
     
-	public function register(AdminRequest $req){
-			$user = new User();
-			$user->full_name = $req->input('name');
-			$user->email = $req->input('email');
-			$user->tel_number = $req->input('number');
-			$user->password = $req->input('password');
-			$user->picture_Url = "https://www.computerhope.com/jargon/g/guest-user.jpg";
-			$user->save();	
-		
-		return redirect()->route('admin-index');
-	}
-
+	
 	public function index(){
 		$company = new Company;
 		$user= new User;
@@ -54,10 +43,23 @@ class AdminController extends Controller{
 	}
 
 	public function EditCompany($id){
-		$company = new Company;
-
+		$company = new Company();
 		return view('EditCompany' , ['company'=>$company->find($id)]);
+	}
 
+	public function EditCompanySubmit($id , Request $request){
+			$company =Company::find($id);
+			$company->company_name = $request->input('companyName');
+			$company->company_address = $request->input('address_company');
+			$company->company_city = $request->input('city');
+			$company->email = $request->input('email');
+			$company->save();
+			return redirect()->route('Edit-Company' , $id);
+		}
+
+	public function DeleteCompany($id){
+		Company::find($id)->delete();
+		return redirect()->route('admin-index')->with('success' , 'Success deleted');
 	}
 
 

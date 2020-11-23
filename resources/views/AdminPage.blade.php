@@ -10,7 +10,7 @@
 	    <br>
 	    <table class="table table-striped ">
 	      <thead>
-	        <tr>a 
+	        <tr>
 	          <th scope="col">#</th>
 	          <th scope="col">NAME</th>
 	          <th scope="col">TELEPHONE</th>
@@ -62,7 +62,7 @@
 		</table>
 	</div>
 
-
+<hr class="my-4">
 
 	<div class="bg-light">
 	  <div class="col-md-12 align-items-center">
@@ -121,6 +121,12 @@
 	</div>
 
 	    <br>
+	    @if ($message = Session::get('success'))
+		<div class="alert alert-success alert-block">
+		    <button type="button" class="close" data-dismiss="alert">×</button>    
+		    <strong>{{ $message }}</strong>
+		</div>
+		@endif
 	    <table class="table">
 		  <thead>
 		    <tr>
@@ -136,19 +142,17 @@
 		  	 @foreach($companies as $company)
 		  		<tr>
 	     			<td>{{ $company->id }}</td>
-	     			<td>{{ $company->company_name}}</td>
-	     			<td>{{ $company->company_address}}</td>
-	     			<td>{{ $company->company_city}}</td>
-	     			<td>{{ $company->company_email}}</td>
-	     			<td><a class="btn btn-warning btn-sm" >Edit</a></td>
+	     			<td>{{ $company->company_name }}</td>
+	     			<td>{{ $company->company_address }}</td>
+	     			<td>{{ $company->company_city }}</td>
+	     			<td>{{ $company->email }}</td>
+	     			<td><a href="{{route('Edit-Company' , $company->id )}}" class="btn btn-warning btn-sm" >Edit</a></td>
 		     	</tr>
 		     @endforeach
 		  </tbody>
 	</table>
 </div>
 </div>
-	
-
 @endsection
 
 

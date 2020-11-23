@@ -3,18 +3,27 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-
+use App\Http\Requests\AdminRequest;
+use App\Models\User;
+use Illuminate\Support\Facades\DB;
 class UserAuthController extends Controller
 {
     //
-	function login(Request $request){
+    public function register(AdminRequest $req){
+            $user = new User();
+            $user->full_name = $req->input('name');
+            $user->email = $req->input('email');
+            $user->tel_number = $req->input('number');
+            $user->password = $req->input('password');
+            $user->picture_Url = "https://www.computerhope.com/jargon/g/guest-user.jpg";
+            $user->save();  
         
-        $u = DB::table('users')->where('email','=',$request->email)->get();
-        // foreach($u as $i){
-        //     echo $i->email;
-        // }
-        
-        $user = $u;
+        return view('ProfilePage',compact('user'));
+    }
+
+
+	public function loginSubmit(Request $request){
+        $user = User::where('email','=',$request->email)->first();
         $data = User::where('email',$request->email)->first();
         $pas = User::Where('password',$request->password)->first();
         $admin = $request->email;
@@ -23,17 +32,43 @@ class UserAuthController extends Controller
             return redirect('admin'); 
         }
         if($data){
-            if($pas){
-                $request->session()->put('email',$data['email']);    
-                session()->put('user',$user);            
-                return view('profile_page',compact('user'));  
+            if($pas){    
+                session(['user' => $user]);
+                return redirect()->route('ProfilePage');  
             }else{
-                return redirect('registration'); 
-            }
+                return redirect()->route('Loginin'); 
+            }	
         } 
         else{
-            return redirect('registration');
+            return view('Registration');
         }                                       
     }
-    
+
+    public function Login(){
+        return view('UserLogin');
+    }
+
+
+    public function ProfilePage(){
+        if(session()->get('user')!=null){
+             return view('ProfilePage');
+        }else{
+            return redirect()->route('Loginin');
+        }
+
+    }
+
+    public function UpdateUser($id , Request $req){
+        $user =User::find($id);
+        $user->full_name = $req->input('full_name');
+        $user->email = $req->input('email');
+        $user->tel_number = $req->input('tel_number');
+        $user->password = $req->input('password');
+        $user->picture_Url = $req->input('picture_Url');
+        session(['user' => $user]);
+        $user->save();
+
+        return redirect()->route('user_details' , $id)->with('success' , 'Success edited');  
+    }
+
 }
