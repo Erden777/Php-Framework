@@ -5,7 +5,7 @@
 @section('navbar')
 	@parent
 	<a class="nav-link" href="{{route('ProfilePage')}}">{{session()->get('user')->full_name }}</a>
-	<a  href="{{route('Logout')}}">Logout </a>
+	<a  class="nav-link"  href="{{route('Logout')}}">Logout </a>
 @endsection
 
 @section('main_content')

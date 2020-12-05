@@ -29,8 +29,9 @@
         <li class="nav-item">
           <a class="nav-link" href="#" tabindex="-1" aria-disabled="true">Help</a>
         </li>
+
       </ul>
-        @show
+        <ul class="navbar-nav">@show</ul>
     </div>
   </nav>
   </div>
