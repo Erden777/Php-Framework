@@ -20,6 +20,7 @@ class UserAuthController extends Controller
         
         return view('ProfilePage',compact('user'));
     }
+    
 
 
 	public function loginSubmit(Request $request){
@@ -71,7 +72,7 @@ class UserAuthController extends Controller
 
     public function Logout(){
         session()->forget('user');
-        return redirect()->route('Loginin');
+        return redirect()->route('/');
     }
 
 }

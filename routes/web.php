@@ -3,11 +3,14 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\UserAuthController;
+use App\Http\Controllers\CompanyController;
+
+use Illuminate\Http\Request;
 
 
 Route::get('/', function () {
-    return view('welcome');
-});
+    return view('index');
+})->name('/');
 
 Route::get('/contact', function () {
     return view('AdminPage');
@@ -23,8 +26,17 @@ Route::post('/register/submit' ,[UserAuthController::class,'register'])->name('r
 Route::get('/login' ,[UserAuthController::class,'login'])->name('Loginin');
 
 Route::get('/profile' ,[UserAuthController::class,'ProfilePage'])->name('ProfilePage');
-
-Route::get('/loginSubmit' ,[UserAuthController::class,'loginSubmit'])->name('LogininSubmit');
+	
+Route::get('/loginSubmit' , function(Request $req){
+	if(!$req->has('isUser')){
+		$auth = new CompanyController();
+		return $auth->CompanyLoginSubmit();
+	
+	}else{
+		$auth= new UserAuthController();
+		return $auth->loginSubmit($req);
+	}
+})->name('LogininSubmit');
 
 Route::get('profile/logout' , [UserAuthController::class, 'Logout'])->name('Logout');
 
@@ -41,6 +53,8 @@ Route::post('/Edit/{id}' ,
 ///Company routes
 Route::post('/addCompany' ,[AdminController::class,'AddCompany'])->name('addcompany');
 
+Route::post('/addVacancy' ,[AdminController::class,'addVacancy'])->name('addvacancy');
+
 Route::get('/admin/edit/{id}' ,
 	[AdminController::class,'EditCompany']
 )->name('Edit-Company');
@@ -56,6 +70,5 @@ Route::get('/admin/edit/{id}/delete' ,
 Route::get('/vacancy/{id}' ,
 	[AdminController::class,'getVacancyByCompany']
 )->name('getCompany');
-
 
 

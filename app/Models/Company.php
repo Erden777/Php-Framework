@@ -12,6 +12,6 @@ class Company extends Model
     protected $table = 'companies';
 
     public function getVacancy(){
-    	return $this->hasMany(Vacancy::class);
+    	return $this->belongsToMany(Vacancy::class);
     }
 }

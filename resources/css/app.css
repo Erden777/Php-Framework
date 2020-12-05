@@ -1,12 +1,11 @@
 body{
 	background-color: #EFF3F8;
-}
 
+}
 
 .navbar-fixed-top {
     min-height: 780px;
 }
-
 
 a{
 	color: #fafafa;
@@ -27,6 +26,7 @@ a{
 .view{
 	background:url('/img/entry-level2.jpg')center no-repeat;
 	margin-top: 20px;
+
 }
 
 .carousel-control-prev{
@@ -40,6 +40,7 @@ a{
 }
 
 .title{
+
 	background-color: rgba(193,37,37 , 0.8); 
 
 }

@@ -24,7 +24,10 @@
 					    <span class="input-group-text"> <i class="fa fa-lock"></i> </span>
 					</div>
 			        <input class="form-control" placeholder="Password" type="password" name="password">
-			    </div>                                    
+			    </div> 
+			     <div class="input-group-text">
+				      <input type="checkbox" name="isUser" value="1" aria-label="Checkbox for following text input">
+				    </div>                                   
 			    <div class="form-group">
 			        <button type="submit" class="btn btn-primary btn-block"> Login </button>
 			    </div>

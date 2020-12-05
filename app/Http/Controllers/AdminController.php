@@ -1,5 +1,7 @@
 <?php
 
+///http://studentsandgraduates.com/
+
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
@@ -7,7 +9,7 @@ use App\Http\Requests\AdminRequest;
 use App\Models\User;
 use App\Models\Company;
 use App\Models\Vacancy;
-use routes\web;
+use routes\web;	
 
 class AdminController extends Controller{
     
@@ -15,7 +17,8 @@ class AdminController extends Controller{
 	public function index(){
 		$company = new Company;
 		$user= new User;
-		return view('AdminPage' , ['users'=>$user->all() , 'companies'=>$company->all()]);
+		$vacancy=new Vacancy;
+		return view('AdminPage' , ['users'=>$user->all() , 'companies'=>$company->all() , 'vacancies'=>$vacancy->all()]);
 	}
 
 	public function detailsUser($id){
@@ -24,6 +27,18 @@ class AdminController extends Controller{
 		return view('detailsUser' , ['user'=>$user->find($id)]);
 	}
 
+	//Vacancy functions
+	//Company functions add edit delete
+	public function addVacancy(Request $request){
+			
+			$vacancy = new Vacancy();
+			$vacancy->name = $request->input('vacancy_name');
+			$vacancy->requirement = $request->input('requirement');
+			$vacancy->salary = $request->input('salary');
+			$vacancy->company_id = $request->input('company_id');
+			$vacancy->save();
+		return redirect()->route('admin-index');
+	}
 
 	//Company functions add edit delete
 	public function AddCompany(Request $request){
@@ -66,10 +81,12 @@ class AdminController extends Controller{
 
 
 	public function getVacancyByCompany($id){
-		$vacancy=Vacancy::find($id);
-		$company = Company::find($vacancy->company_id);
-		return dd($company);
+		$vacancy=Company::find($id);
+		
+		return dd($vacancy);
 	}
+
+
 
 
 }

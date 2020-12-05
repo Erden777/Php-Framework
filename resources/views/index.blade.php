@@ -6,12 +6,24 @@
 
 @section('navbar')
 		@parent
+		@if(session()->get('user')==null)
 		<li class="nav-item">
 			 <a class="nav-link" href="/register">Regitration</a>
 		</li>
 		<li class="nav-item">
 			 <a class="nav-link" data-toggle="modal" data-target="#elegantModalForm" href="#">Login in</a>
 		</li>
+		@endif
+		@if(session()->get('user')!=null)
+
+		<li class="nav-item">
+			 <a class="nav-link" href="{{route('ProfilePage')}}">{{session()->get('user')->full_name }}</a>
+		</li>
+		<li class="nav-item">
+			<a  class="nav-link"  href="{{route('Logout')}}">Logout </a>
+		</li>
+		@endif
+ 
 @endsection
 <!-- Modal -->
 <div class="modal fade" id="elegantModalForm" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
