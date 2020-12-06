@@ -6,9 +6,12 @@
 
 @section('navbar')
 		@parent
-		@if(session()->get('user')==null)
+		@if(session()->get('user')==null && session()->get('company')==null)
 		<li class="nav-item">
 			 <a class="nav-link" href="/register">Regitration</a>
+		</li>
+		<li class="nav-item">
+			 <a class="nav-link" href="{{ route('register-company') }}">Regitration Company</a>
 		</li>
 		<li class="nav-item">
 			 <a class="nav-link" data-toggle="modal" data-target="#elegantModalForm" href="#">Login in</a>
@@ -19,12 +22,65 @@
 		<li class="nav-item">
 			 <a class="nav-link" href="{{route('ProfilePage')}}">{{session()->get('user')->full_name }}</a>
 		</li>
+	
 		<li class="nav-item">
 			<a  class="nav-link"  href="{{route('Logout')}}">Logout </a>
 		</li>
 		@endif
+		
+		@if(session()->get('company')!=null)
+		<li class="nav-item">
+			 <a class="nav-link btn btn-outline-info" data-toggle="modal" data-target="#basicExampleModal2" href="#">Add Vacancy</a>
+		</li>
+		<li class="nav-item">
+			 <a class="nav-link" href="{{route('ProfilePage')}}">{{session()->get('company')->company_name }}</a>
+			 
+		</li>
+		<li class="nav-item">
+			<a  class="nav-link"  href="{{route('Logout')}}">Logout </a>
+		</li>
+		<div class="modal fade " id="basicExampleModal2" tabindex="-1" role="dialog" aria-labelledby="basicExampleModal2"
+	  aria-hidden="true">
+	  <div class="modal-dialog modal-lg" role="document">
+	    <div class="modal-content">
+	      <div class="modal-header ">
+	        <h5 class="modal-title" id="basicExampleModal2">Add new vacancy</h5>
+	        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+	          <span aria-hidden="true">&times;</span>
+	        </button>
+	      </div>
+	      <form method="post" action="{{ route('addvacancy') }}">
+		      <div class="modal-body">
+		      		@csrf
+	                <div class="form-group">
+	                  <label>Name</label>
+	                  <input type="text" class="form-control" name="vacancy_name">
+	                </div>
+	                <div class="form-group">
+	                  <label>Requirement</label>
+	                    <textarea class="form-control" id="exampleFormControlTextarea1" name="requirement" rows="3"></textarea>
+	                </div>
+	              <div class="form-group">
+	                <label>Salary</label>
+	                <input type="number" class="form-control" name="salary">
+	              </div>
+	              <div class="form-group">
+				    <input type="text" name="company_id" value="{{session()->get('company')->id}}"> 
+				  </div>
+	          </div>
+	      	  <div class="modal-footer">
+			        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+			        <button type="submit" class="btn btn-primary">Add</button>
+			  </div>
+	    </form>
+	    </div>
+	  </div>
+	</div>
+		@endif
  
 @endsection
+
+
 <!-- Modal -->
 <div class="modal fade" id="elegantModalForm" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
   aria-hidden="true">
@@ -212,32 +268,20 @@
 		 		<div class="row ml-2">
 		 			<div class="col-md-6">
 		 				<ul class="list-group list-group-flush">
-						  <li class="list-group-item">Nur-Sultan</li>
-						  <li class="list-group-item">Shymkent</li>
-						  <li class="list-group-item">Aktau</li>
-						  <li class="list-group-item">Kokshetau</li>
-						  <li class="list-group-item">Pavlodar</li>
-						   <li class="list-group-item">Semey</li>
-						  <li class="list-group-item">Temirtau</li>
-						  <li class="list-group-item">Karaganda</li>
-						  <li class="list-group-item">Ust-Kamenogorsk</li>
-						  
-						  
+		 				@for($i=0 ; $i< 9; $i++)
+						  <li class="list-group-item"><a href="#">{{ $countries[$i]->name}}</a></li>
+						   @endfor  
 						</ul>
 		 			</div>
 
 
 		 			<div class="col-md-6">
 		 				<ul class="list-group list-group-flush">
-						  <li class="list-group-item">Almaty</li>
-						  <li class="list-group-item">Atyrau</li>
-						  <li class="list-group-item">Aktobe</li>
-						  <li class="list-group-item">Uralsk</li>
-						  <li class="list-group-item">Petropavlovsk</li>
-						   <li class="list-group-item">Taraz</li>
-						  <li class="list-group-item">Turkestan</li>
-						  <li class="list-group-item">Kyzylorda</li>
-						  
+		 				@if(count($countries)>9)
+		 					@for($i = 9 ; $i< count($countries) ; $i++ )
+						  		<li class="list-group-item"><a href="#">{{ $countries[$i]->name}}</a></li>
+						  	 @endfor  
+						  @endif
 						</ul>
 		 			</div>
 				 		

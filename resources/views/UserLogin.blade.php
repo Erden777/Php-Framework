@@ -5,6 +5,7 @@
 @section('main_content')
 
 @include('inc.second_navbar')
+
 <div class="container">
 	<hr>
 	<div class="card bg-light">
@@ -25,8 +26,8 @@
 					</div>
 			        <input class="form-control" placeholder="Password" type="password" name="password">
 			    </div> 
-			     <div class="input-group-text">
-				      <input type="checkbox" name="isUser" value="1" aria-label="Checkbox for following text input">
+			     	<div class="input-group-text">
+				      	<input type="checkbox" name="isCompany" value="1" aria-label="Checkbox for following text input">
 				    </div>                                   
 			    <div class="form-group">
 			        <button type="submit" class="btn btn-primary btn-block"> Login </button>

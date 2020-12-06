@@ -11,7 +11,7 @@
 	<div class="card bg-light">
 		<article class="card-body mx-auto" style="max-width:800px;">
 
-			<h4 class="card-title mt-3 text-center">Create Account</h4>
+			<h4 class="card-title mt-3 text-center">Create Company Account</h4>
 			<p class="text-center">Get started with your free account</p>
 			<p style="text-align: center">
 				<a href="" class="btn btn-block btn-twitter"> <span class="fab fa-twitter" ></span><strong> Twitter</strong></a>
@@ -29,37 +29,39 @@
 		    		</ul>
 		    	</div>
 		    @endif
-			<form method="post" action="{{ route('register-form') }}" >
+			<form method="post" action="{{ route('register-company-form') }}" >
 				@csrf
 				<div class="form-group input-group">
 					<div class="input-group-prepend">
 					    <span class="input-group-text"> <i class="fa fa-user"></i> </span>
 					 </div>
-			        <input name="name" class="form-control" placeholder="Name" type="text">
+			        <input name="company_name" class="form-control" placeholder="Name" type="text">
 			    </div> 
+			    
 			    <div class="form-group input-group">
 			    	<div class="input-group-prepend">
 					    <span class="input-group-text"> <i class="fa fa-envelope"></i> </span>
 					 </div>
-			        <input name="email" class="form-control" placeholder="Email address" type="email">
+			        <input name="company_email" class="form-control" placeholder="Email address" type="email">
 			    </div> 
+			  
 			    <div class="form-group input-group">
 			    	<div class="input-group-prepend">
-					    <span class="input-group-text"> <i class="fa fa-phone"></i> </span>
-					</div>
-			    	<input name="number" class="form-control" placeholder="Phone number" type="number">
-			    </div> 
-			    <div class="form-group input-group">
-			    	<div class="input-group-prepend">
-					    <span class="input-group-text"> <i class="fa fa-building"></i> </span>
-					</div>
-					<select class="form-control" style="margin-left: 0" name="job_type">
-						<option disabled selected>Select job type</option>
-						<option>Designer</option>
-						<option>Manager</option>
-						<option>Accaunting</option>
-					</select>
+					    <span class="input-group-text"> <i class="fa fa-building"></i></span>
+					</div>			
+				    <select class="form-control" id="exampleFormControlSelect1" name="country_id">
+				    		<option disabled selected>Country</option>
+				    	@foreach($countries as $c)
+					      <option value="{{$c->id}}">{{$c->name}}</option>
+					      @endforeach
+				    </select>
 				</div> <!-- form-group end.// -->
+				<div class="form-group input-group">
+					<div class="input-group-prepend">
+					    <span class="input-group-text"> <i class="fa fa-user"></i> </span>
+					 </div>
+			        <input name="company_address" class="form-control" placeholder="Address" type="text">
+			    </div> 
 			    <div class="form-group input-group">
 			    	<div class="input-group-prepend">
 					    <span class="input-group-text"> <i class="fa fa-lock"></i> </span>

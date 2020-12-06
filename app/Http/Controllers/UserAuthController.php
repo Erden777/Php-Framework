@@ -20,7 +20,7 @@ class UserAuthController extends Controller
         
         return view('ProfilePage',compact('user'));
     }
-    
+
 
 
 	public function loginSubmit(Request $request){
@@ -72,7 +72,25 @@ class UserAuthController extends Controller
 
     public function Logout(){
         session()->forget('user');
+         session()->forget('company');
         return redirect()->route('/');
     }
 
+
+    public function uploadFile(Request $request){
+            $file=$request->file('resume');
+            $filename=time().'.'.$file->getClientOriginalExtension();
+
+            $request->file('resume')->move('storage/uploads/', $filename);
+            $user =User::find($request->input('userID'))->first();
+            $id=$request->input('userID');
+            $user->resumepath = $filename;
+            $user->save();
+            session(['user' => $user]);
+        return redirect()->back();
+    }
+
+    public function downloadresume($resume){
+        return response()->download('storage/uploads/'.$resume);
+    }
 }
