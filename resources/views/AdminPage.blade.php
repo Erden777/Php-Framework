@@ -1,4 +1,4 @@
-@extends('Admin_layout.Admin_layout')
+ 	@extends('Admin_layout.Admin_layout')
 
 @section('title')Admin Page @endsection
 

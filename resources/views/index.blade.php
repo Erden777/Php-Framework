@@ -7,30 +7,28 @@
 @section('navbar')
 		@parent
 		@if(session()->get('user')==null && session()->get('company')==null)
-		<li class="nav-item">
-			 <a class="nav-link" href="/register">Regitration</a>
-		</li>
-		<li class="nav-item">
-			 <a class="nav-link" href="{{ route('register-company') }}">Regitration Company</a>
-		</li>
-		<li class="nav-item">
-			 <a class="nav-link" data-toggle="modal" data-target="#elegantModalForm" href="#">Login in</a>
-		</li>
+			<li class="nav-item">
+				 <a class="nav-link" href="/register">Regitration</a>
+			</li>
+			<li class="nav-item">
+				 <a class="nav-link" href="{{ route('register-company') }}">Regitration Company</a>
+			</li>
+			<li class="nav-item">
+				 <a class="nav-link" data-toggle="modal" data-target="#elegantModalForm" href="#">Login in</a>
+			</li>
 		@endif
 		@if(session()->get('user')!=null)
-
-		<li class="nav-item">
-			 <a class="nav-link" href="{{route('ProfilePage')}}">{{session()->get('user')->full_name }}</a>
-		</li>
-	
-		<li class="nav-item">
-			<a  class="nav-link"  href="{{route('Logout')}}">Logout </a>
-		</li>
+			<li class="nav-item">
+				 <a class="nav-link" href="{{route('ProfilePage')}}">{{session()->get('user')->full_name }}</a>
+			</li>
+			<li class="nav-item">
+				<a  class="nav-link"  href="{{route('Logout')}}">Logout </a>
+			</li>
 		@endif
 		
 		@if(session()->get('company')!=null)
 		<li class="nav-item">
-			 <a class="nav-link btn btn-outline-info" data-toggle="modal" data-target="#basicExampleModal2" href="#">Add Vacancy</a>
+			 <a class="nav-link btn btn-outline-info" href="{{route('create-Vacancy')}}">Add Vacancy</a>
 		</li>
 		<li class="nav-item">
 			 <a class="nav-link" href="{{route('ProfilePage')}}">{{session()->get('company')->company_name }}</a>
@@ -39,43 +37,7 @@
 		<li class="nav-item">
 			<a  class="nav-link"  href="{{route('Logout')}}">Logout </a>
 		</li>
-		<div class="modal fade " id="basicExampleModal2" tabindex="-1" role="dialog" aria-labelledby="basicExampleModal2"
-	  aria-hidden="true">
-	  <div class="modal-dialog modal-lg" role="document">
-	    <div class="modal-content">
-	      <div class="modal-header ">
-	        <h5 class="modal-title" id="basicExampleModal2">Add new vacancy</h5>
-	        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-	          <span aria-hidden="true">&times;</span>
-	        </button>
-	      </div>
-	      <form method="post" action="{{ route('addvacancy') }}">
-		      <div class="modal-body">
-		      		@csrf
-	                <div class="form-group">
-	                  <label>Name</label>
-	                  <input type="text" class="form-control" name="vacancy_name">
-	                </div>
-	                <div class="form-group">
-	                  <label>Requirement</label>
-	                    <textarea class="form-control" id="exampleFormControlTextarea1" name="requirement" rows="3"></textarea>
-	                </div>
-	              <div class="form-group">
-	                <label>Salary</label>
-	                <input type="number" class="form-control" name="salary">
-	              </div>
-	              <div class="form-group">
-				    <input type="text" name="company_id" value="{{session()->get('company')->id}}"> 
-				  </div>
-	          </div>
-	      	  <div class="modal-footer">
-			        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-			        <button type="submit" class="btn btn-primary">Add</button>
-			  </div>
-	    </form>
-	    </div>
-	  </div>
-	</div>
+
 		@endif
  
 @endsection

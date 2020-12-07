@@ -6,6 +6,8 @@ use App\Http\Controllers\UserAuthController;
 use App\Http\Controllers\CompanyController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\VacancyController;
+use App\Http\Controllers\CategoryController;
+use App\Models\JobCategory;
 
 use Illuminate\Http\Request;
 
@@ -18,7 +20,8 @@ Route::get('/contact', function () {
 
 
 Route::get('/register', function () {
-   	 return view('Registration'); 
+	$categories = new JobCategory;
+   	 return view('Registration' , ['categories'=>$categories->all()]); 
 });
 
 Route::get('/registerCompany' ,[CompanyController::class,'register'])->name('register-company');
@@ -60,6 +63,9 @@ Route::post('/addCompany' ,[AdminController::class,'AddCompany'])->name('addcomp
 
 Route::post('/addVacancy' ,[AdminController::class,'addVacancy'])->name('addvacancy');
 
+Route::post('/add/Vacancy' ,[VacancyController::class,'addVacancyWithCategory'])->name('Add-Vacancy-With-category');
+
+
 Route::get('/admin/edit/{id}' ,
 	[AdminController::class,'EditCompany']
 )->name('Edit-Company');
@@ -82,4 +88,9 @@ Route::get('resume/view/{resume}' ,[UserAuthController::class , 'downloadresume'
 
 //find job
 Route::get('find/job' , [VacancyController::class, 'getAllVacancy'])->name('find-job');
- 
+
+
+//Assign category
+Route::post('assign/category' , [CategoryController::class  ,'assignVacancyCategory'])->name('assignCategory');
+
+Route::get('create/vacancy' , [CategoryController::class  ,'create_vacancy'])->name('create-Vacancy');

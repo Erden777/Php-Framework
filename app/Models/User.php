@@ -11,6 +11,10 @@ class User extends Authenticatable
 {
     use HasFactory, Notifiable;
 
+     public function categories()
+    {
+        return $this->belongsToMany('App\Models\JobCategory');
+    }
     /**
      * The attributes that are mass assignable.
      *

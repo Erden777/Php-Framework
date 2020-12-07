@@ -15,9 +15,10 @@ class UserAuthController extends Controller
             $user->email = $req->input('email');
             $user->tel_number = $req->input('number');
             $user->password = $req->input('password');
+            $user->category_id = $req->input('job_type');
             $user->picture_Url = "https://www.computerhope.com/jargon/g/guest-user.jpg";
             $user->save();  
-        
+             session(['user' => $user]);
         return view('ProfilePage',compact('user'));
     }
 

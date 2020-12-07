@@ -54,10 +54,10 @@
 					    <span class="input-group-text"> <i class="fa fa-building"></i> </span>
 					</div>
 					<select class="form-control" style="margin-left: 0" name="job_type">
-						<option disabled selected>Select job type</option>
-						<option>Designer</option>
-						<option>Manager</option>
-						<option>Accaunting</option>
+						@foreach($categories as $category)
+						<option value="{{$category->id}}">{{$category->name}}</option>
+						@endforeach
+						
 					</select>
 				</div> <!-- form-group end.// -->
 			    <div class="form-group input-group">
