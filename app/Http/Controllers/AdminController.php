@@ -48,7 +48,6 @@ class AdminController extends Controller{
 		        'city' => 'required',
 		        'email' => 'required|email',
 		    ]);
-
 			$company = new Company();
 			$company->company_name = $request->input('companyName');
 			$company->company_address = $request->input('address_company');
@@ -71,7 +70,7 @@ class AdminController extends Controller{
 			$company->email = $request->input('email');
 			$company->save();
 			return redirect()->route('Edit-Company' , $id);
-		}
+	}
 
 	public function DeleteCompany($id){
 		Company::find($id)->delete();

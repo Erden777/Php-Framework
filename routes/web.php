@@ -59,11 +59,15 @@ Route::post('/Edit/{id}' ,
 )->name('Update-User');
 
 ///Company routes
+Route::get('company/profile' , [CompanyController::class , 'companyProfile'])->name("Company-Profile");
 Route::post('/addCompany' ,[AdminController::class,'AddCompany'])->name('addcompany');
 
 Route::post('/addVacancy' ,[AdminController::class,'addVacancy'])->name('addvacancy');
 
 Route::post('/add/Vacancy' ,[VacancyController::class,'addVacancyWithCategory'])->name('Add-Vacancy-With-category');
+Route::get('/delete/Vacancy/{id}' ,[VacancyController::class,'addVacancyWithCategory'])->name('Delete-Vacancy');
+
+Route::post('/upload/company/ava' , [CompanyController::class ,'uploadCompanyPicture'])->name('Company-Ava-Upload');
 
 
 Route::get('/admin/edit/{id}' ,

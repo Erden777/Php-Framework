@@ -11,7 +11,12 @@ class Company extends Model
     public $timestamps = false;
     protected $table = 'companies';
 
+
     public function getVacancy(){
-    	return $this->belongsToMany(Vacancy::class);
+    	return $this->belongsToMany('App\Models\Vacancy' , 'vacancies');
+    }
+
+    public function country(){
+    	return $this->belongsTo('App\Models\Country');
     }
 }

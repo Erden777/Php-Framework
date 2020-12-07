@@ -30,7 +30,7 @@
 			 <a class="nav-link btn btn-outline-info" data-toggle="modal" data-target="#basicExampleModal2" href="#">Add Vacancy</a>
 		</li>
 		<li class="nav-item">
-			 <a class="nav-link" href="{{route('ProfilePage')}}">{{session()->get('company')->company_name }}</a>
+			 <a class="nav-link" href="{{route('Company-Profile')}}">{{session()->get('company')->company_name }}</a>
 			 
 		</li>
 		<li class="nav-item">

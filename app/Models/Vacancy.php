@@ -12,7 +12,7 @@ class Vacancy extends Model
     protected $table = 'vacancies';
 
     public function getCompany(){
-    	return $this->belongsTo('App\Models\Company' , 'foreign_key');
+    	return $this->belongsTo('App\Models\Company' , 'companies');
     }
 
      public function categories(){

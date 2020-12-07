@@ -9,6 +9,30 @@ use App\Models\Country;
 
 class CompanyController extends Controller
 {
+
+    public function companyProfile(){
+         if(session()->get('company')!=null){
+             $vacancies = new Vacancy;
+             return view('CompanyProfile' , ['vacancies'=>$vacancies->all()]);
+        }else{
+            return redirect()->route('Loginin');
+        }
+    }
+
+
+     public function uploadCompanyPicture(Request $request){
+            $file=$request->file('picture');
+            $filename=time().'.'.$file->getClientOriginalExtension();
+
+            $request->file('picture')->move('storage/picture/', $filename);
+            $company =Company::find($request->input('companyID'))->first();
+            $id=$request->input('companyID');
+            $company->pictureURL = $filename;
+            $company->save();
+            session(['company' => $company]);
+        return redirect()->back();
+    }
+
 	public function register(){
 		$countries = new Country;
 		return view('RegistraionCompany' , ['countries'=>$countries->all()]);

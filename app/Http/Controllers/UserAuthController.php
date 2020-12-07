@@ -73,7 +73,7 @@ class UserAuthController extends Controller
 
     public function Logout(){
         session()->forget('user');
-         session()->forget('company');
+        session()->forget('company');
         return redirect()->route('/');
     }
 
