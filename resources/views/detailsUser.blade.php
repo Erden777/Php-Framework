@@ -1,6 +1,6 @@
 @extends('Admin_layout.Admin_layout')
 
-@section('title')Admin Page @endsection
+@section('title')User details Page @endsection
 
 @section('main_content') 
 	<div class="container" layout:fragment="main_admin_content">

@@ -100,17 +100,17 @@
 				@foreach($vacancies as $vacancy)
 				<div class="result-list-row">
 					<div class="row">
-						<div class="col-lg-2 col-md-2 col-sm-2 hidden-xs img-center">
-							<img src="/img/ava.png">
+						<div class="col-lg-2 col-md-2  col-sm-2 hidden-xs img-center">
+							<img width="150" height="120" src="https://image.pngaaa.com/346/744346-middle.png">
 						</div>
 						<div class="col-lg-6 col-md-7 col-sm-6">
 							<div class="row-heading">
-								<a href="#" class="bold orange" style="text-decoration: ">{{$vacancy->name}}</a>
+								<a href="{{route('vacancy_view' , $vacancy->id)}}" style="font-weight: bold; font-size: 17px;" class="bold orange" style="text-decoration: none;">{{$vacancy->name}}</a>
 							</div>
 							<div class="row-info">
 								<p>{{$vacancy->requirement}}</p>
 								<p>
-									<a href="#" class="bold dark" style="text-decoration: ">
+									<a href="#" class="bold dark" style="text-decoration:none ">
 										{{$vacancy->requirement}}
 									</a>
 								</p>
@@ -122,49 +122,47 @@
 						<div class="col-lg-4 col-md-3 col-sm-3">
 							<ul>
 								<li>
+									<span class="badge badge-info">
 									<i class="fa fa-dollar-sign"></i>
-									from {{$vacancy->salary}} tg.
+									from {{$vacancy->salary}} KZT.
+								</span>
 								</li>
 								<li>
+									<span class="badge badge-warning">
 									<i class="fa fa-briefcase"></i>
 									With out work experience
+								</span>
 								</li>
 								<li>
+									<span class="badge badge-info">
 									<i class="fa fa-graduation-cap"></i>
-									Higher
+									{{$vacancy->Company->company_name}}
+								</span>
 								</li>
 							
 								<li>
+									<span class="badge badge-success">
 									<i class="fa fa-map-marker"></i>
 									{{ $countries->find($companies->find($vacancy->company_id)->country_id)->name }}/ Ili district
+								</span>
 								</li>
 								<li>
+									<span class="badge badge-danger">
 									<i class="fa fa-clock-o"></i>
 									Full time work
+								</span>
 								</li>
 							</ul>
 						</div>
 					</div>
-					@endforeach
-			
 				</div>
+				@endforeach
 				</div>
 				</div>
 			</div>
 			</div>
             
-			<nav aria-label="...">
-	  				<ul class="pagination">
-	    				<li class="page-item disabled"><a class="page-link">Previous</a></li>
-	    				<li class="page-item active"><a class="page-link" href="#">1</a></li>
-	    				<li class="page-item"><a class="page-link" href="#">2</a></li>
-	    				<li class="page-item"><a class="page-link" href="#">3</a></li>
-	    				<li class="page-item"><a class="page-link" href="#">4</a></li>
-	    				<li class="page-item"><a class="page-link" href="#">5</a></li>
-	    				<li class="page-item"><a class="page-link" href="#">Next</a>
-	    				</li>
-	  				</ul>
-			</nav>
+			
 			</div>
 		</div>
 

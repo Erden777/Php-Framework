@@ -12,7 +12,9 @@ use App\Models\JobCategory;
 use Illuminate\Http\Request;
 
 
-Route::get('/', [HomeController::class,'index'])->name('/');
+Route::get('/',
+ [HomeController::class,'index']
+)->name('/');
 
 Route::get('/contact', function () {
     return view('AdminPage');
@@ -21,34 +23,48 @@ Route::get('/contact', function () {
 
 Route::get('/register', function () {
 	$categories = new JobCategory;
-   	 return view('Registration' , ['categories'=>$categories->all()]); 
+   	 return view('Registration' ,
+   	 ['categories'=>$categories->all()]); 
 });
 
-Route::get('/registerCompany' ,[CompanyController::class,'register'])->name('register-company');
+Route::get('/registerCompany' ,
+	[CompanyController::class,'register']
+)->name('register-company');
 ///User operations
-Route::post('/register/submit' ,[UserAuthController::class,'register'])->name('register-form');
+Route::post('/register/submit' ,
+	[UserAuthController::class,'register']
+)->name('register-form');
 
-Route::post('/register1/submit' ,[CompanyController::class,'registerCompany'])->name('register-company-form');
+Route::post('/register1/submit' ,
+	[CompanyController::class,'registerCompany']
+)->name('register-company-form');
 
 
-Route::get('/login' ,[UserAuthController::class,'login'])->name('Loginin');
+Route::get('/login' ,
+	[UserAuthController::class,'login']
+)->name('Loginin');
 
-Route::get('/profile' ,[UserAuthController::class,'ProfilePage'])->name('ProfilePage');
+Route::get('/profile' ,
+	[UserAuthController::class,'ProfilePage']
+)->name('ProfilePage');
 	
 Route::get('/loginSubmit' , function(Request $req){
 	if($req->has('isCompany')){
 		$auth = new CompanyController();
 		return $auth->CompanyLoginSubmit($req);
-	
 	}else{
 		$auth= new UserAuthController();
 		return $auth->loginSubmit($req);
 	}
 })->name('LogininSubmit');
 
-Route::get('profile/logout' , [UserAuthController::class, 'Logout'])->name('Logout');
+Route::get('profile/logout', 
+	[UserAuthController::class, 'Logout']
+)->name('Logout');
 
-Route::get('/admin' ,[AdminController::class,'index'])->name('admin-index');
+Route::get('/admin' ,
+	[AdminController::class,'index']
+)->name('admin-index');
 
 Route::get('/admin/{id}' ,
 	[AdminController::class,'detailsUser']
@@ -59,15 +75,45 @@ Route::post('/Edit/{id}' ,
 )->name('Update-User');
 
 ///Company routes
-Route::get('company/profile' , [CompanyController::class , 'companyProfile'])->name("Company-Profile");
-Route::post('/addCompany' ,[AdminController::class,'AddCompany'])->name('addcompany');
+Route::get('company/profile' , 
+	[CompanyController::class , 'companyProfile']
+)->name("Company-Profile");
 
-Route::post('/addVacancy' ,[AdminController::class,'addVacancy'])->name('addvacancy');
+Route::get('company/details/{id}/',
+	[CompanyController::class , 'detailsCompany']
+)->name('Details-Company-Edit');
 
-Route::post('/add/Vacancy' ,[VacancyController::class,'addVacancyWithCategory'])->name('Add-Vacancy-With-category');
-Route::get('/delete/Vacancy/{id}' ,[VacancyController::class,'addVacancyWithCategory'])->name('Delete-Vacancy');
+Route::post('company/details/{id}/update',
+	[CompanyController::class , 'updateCompany']
+)->name('Update-Company');
 
-Route::post('/upload/company/ava' , [CompanyController::class ,'uploadCompanyPicture'])->name('Company-Ava-Upload');
+Route::post('/addCompany' ,
+	[AdminController::class,'AddCompany']
+)->name('addcompany');
+
+Route::post('/addVacancy' ,
+	[AdminController::class,'addVacancy']
+)->name('addvacancy');
+
+Route::post('/add/Vacancy' ,
+	[VacancyController::class,'addVacancyWithCategory']
+)->name('Add-Vacancy-With-category');
+
+Route::get('/delete/Vacancy/{id}' ,
+	[VacancyController::class,'Delete_Vacancy']
+)->name('Delete-Vacancy');
+
+Route::get('/edit/Vacancy/{id}' ,
+	[VacancyController::class,'Edit_Vacancy']
+)->name('Edit-Vacancy');
+
+Route::post('/edit/Vacancy/{id}/submit' ,
+	[VacancyController::class,'Edit_Vacancy_submit']
+)->name('Edit-Vacancy-submit');
+
+Route::post('/upload/company/ava' , 
+	[CompanyController::class ,'uploadCompanyPicture']
+)->name('Company-Ava-Upload');
 
 
 Route::get('/admin/edit/{id}' ,
@@ -87,14 +133,32 @@ Route::get('/vacancy/{id}' ,
 )->name('getCompany');
 
 ///Resume downloads
-Route::post('/image/upload' , [UserAuthController::class,'uploadFile'])->name('upload-file');
-Route::get('resume/view/{resume}' ,[UserAuthController::class , 'downloadresume'])->name('download-resume');
+Route::post('/image/upload' , 
+	[UserAuthController::class,'uploadFile']
+)->name('upload-file');
+
+Route::get('resume/view/{resume}' ,
+	[UserAuthController::class , 'downloadresume']
+)->name('download-resume');
 
 //find job
-Route::get('find/job' , [VacancyController::class, 'getAllVacancy'])->name('find-job');
-
+Route::get('find/job' ,
+ [VacancyController::class, 'getAllVacancy']
+)->name('find-job');
 
 //Assign category
-Route::post('assign/category' , [CategoryController::class  ,'assignVacancyCategory'])->name('assignCategory');
+Route::post('assign/category' , 
+	[CategoryController::class  ,'assignVacancyCategory']
+)->name('assignCategory');
 
-Route::get('create/vacancy' , [CategoryController::class  ,'create_vacancy'])->name('create-Vacancy');
+Route::post('dissign/category' , 
+	[CategoryController::class  ,'dissignVacancyCategory']
+)->name('dissignCategory');
+
+Route::get('create/vacancy' , 
+	[CategoryController::class  ,'create_vacancy']
+)->name('create-Vacancy');
+
+Route::get('/vacancy/view/{id}' , 
+	[VacancyController::class  ,'vacancy_view']
+)->name('vacancy_view');

@@ -11,11 +11,11 @@ class Vacancy extends Model
 
     protected $table = 'vacancies';
 
-    public function getCompany(){
-    	return $this->belongsTo('App\Models\Company' , 'companies');
+    public function Company(){
+    	return $this->belongsTo('App\Models\Company');
     }
 
-     public function categories(){
-        return $this->belongsToMany('App\Models\JoCcategory', 'category_vacancy');
+     public function category(){
+        return $this->belongsToMany('App\Models\VacancyCategory');
     }
 }

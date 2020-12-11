@@ -21,12 +21,17 @@ class CategoryController extends Controller
     }
 
     public function assignVacancyCategory(Request $request){
-    	/*$category_vacancy= new VacancyCategory;
+    	$category_vacancy = new VacancyCategory;
     	$category_vacancy->category_id = $request->input('category_id');
-    	$category_vacancy->vacancy_id = $request->input('category_id');*/
-    	return dd($request);
-    	//return redirect()->back();
+    	$category_vacancy->vacancy_id = $request->input('vacancy_id');
+        $category_vacancy->save();
+    	//return dd($request);
+    	return redirect()->route('Edit-Vacancy' , $request->input('vacancy_id'));
     }
 
+    public function dissignVacancyCategory(Request $request){
+        VacancyCategory::find($request->input('vCategory_id'))->delete();
+        return redirect()->route('Edit-Vacancy' , $request->input('vacancy_id'));
+    }
    
 }

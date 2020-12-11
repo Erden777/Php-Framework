@@ -8,14 +8,32 @@
 		@parent
 		@if(session()->get('user')==null && session()->get('company')==null)
 			<li class="nav-item">
-				 <a class="nav-link" href="/register">Regitration</a>
-			</li>
-			<li class="nav-item">
-				 <a class="nav-link" href="{{ route('register-company') }}">Regitration Company</a>
+					 <a  class="nav-link" href="#" data-toggle="modal" data-target="#staticBackdrop">
+				  Register
+				</a>
+				
 			</li>
 			<li class="nav-item">
 				 <a class="nav-link" data-toggle="modal" data-target="#elegantModalForm" href="#">Login in</a>
 			</li>
+			<!-- Modal -->
+			<div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+			  <div class="modal-dialog modal-mв">
+			    <div class="modal-content">
+			      <div class="modal-header">
+			        <h5 class="modal-title" id="staticBackdropLabel">Choose</h5>
+			       <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+		          <span aria-hidden="true">&times;</span>
+		        </button>
+			      </div>
+			      <div class="modal-body">
+			        <a href="{{ route('register-company')}}" class="btn btn-primary" data-bs-dismiss="modal">Register company</a>
+			        <a  href="/register" class="btn btn-primary">Register user</a>
+			      </div>
+			      
+			    </div>
+			  </div>
+			</div>
 		@endif
 		@if(session()->get('user')!=null)
 			<li class="nav-item">

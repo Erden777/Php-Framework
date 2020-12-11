@@ -23,7 +23,6 @@ class AdminController extends Controller{
 
 	public function detailsUser($id){
 		$user= new User;
-
 		return view('detailsUser' , ['user'=>$user->find($id)]);
 	}
 

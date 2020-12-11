@@ -10,4 +10,12 @@ class VacancyCategory extends Model
 	public $timestamps = false;
     use HasFactory;
     protected $table = 'category_vacancy';
+
+    public function category(){
+    	return $this->belongsTo('App\Models\JobCategory');
+    }
+
+     public function vacancy(){
+    	return $this->belongsTo('App\Models\Vacancy');
+    }
 }

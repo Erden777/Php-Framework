@@ -74,4 +74,22 @@ class CompanyController extends Controller
         } 
 		
 	}
+
+    public function detailsCompany($id){
+        $company= new Company;
+
+        return view('EditCompanyProfile' , ['company'=>$company->find($id)]);
+    }
+
+    public function updateCompany($id , Request $request){
+
+            $company =Company::find($id);
+            $company->company_name = $request->input('companyName');
+            $company->company_address = $request->input('address_company');
+            $company->email = $request->input('email');
+            $company->password = $request->input('password');
+            $company->save();
+             session(['company' => $company]);
+            return redirect()->route('Company-Profile');
+    }
 }
