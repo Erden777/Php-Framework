@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Http\Requests\AdminRequest;
 use App\Models\User;
+use App\Models\Confirm_Requests;
 use Illuminate\Support\Facades\DB;
 class UserAuthController extends Controller
 {
@@ -53,7 +54,9 @@ class UserAuthController extends Controller
 
     public function ProfilePage(){
         if(session()->get('user')!=null){
-             return view('ProfilePage');
+            $confirm = Confirm_Requests::where('user_id','=', session()->get('user')->id)->get();
+        
+             return view('ProfilePage' ,['confirm'=>$confirm]);
         }else{
             return redirect()->route('Loginin');
         }

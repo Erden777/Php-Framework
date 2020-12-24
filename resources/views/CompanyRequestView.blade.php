@@ -115,18 +115,18 @@
 				             	</div>
 				             	<div class="col-md-5">
 				             		<div class="row">
-				             		<div class="col-md-3">
+				             		<div class="col-md-2">
 				             		<form method="post" action="{{ route('tohire')}}">
 				             			@csrf
 				             			<input type="hidden" name="requestId" value="{{$req->id}}">
-				             			<button class="btn btn-info btn-sm">TO HIRE</button>
+				             			<button class="btn btn-info btn-sm"><i class="fas fa-plus"></i></button>
 				             		</form>
 				             		</div>
-				             		<div class="col-md-2">
+				             		<div class="col-md-2 ">
 				             		<form method="post" action="{{ route('rejectrequests')}}">
 				             			@csrf
 				             			<input type="hidden" name="requestId" value="{{$req->id}}">
-				             			<button class="btn btn-danger btn-sm">REJECT</button>
+				             			<button class="btn btn-danger btn-sm "><i class="fas fa-minus"></i></button>
 				             		</form>
 				             	</div>
 				             	</div>

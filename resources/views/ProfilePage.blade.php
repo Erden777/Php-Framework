@@ -39,6 +39,12 @@
 	            <h6>Email:{{session()->get('user')->email}} </h6>
 	            <h6>Tel-number: {{session()->get('user')->tel_number}} </h6>
 	            <h6>Old: 19 Year</h6>
+                @if($confirm!=null)
+                <h6>Place of work:</h6>
+                @foreach($confirm as $con)
+                <h6>Company:{{$con->company->company_name}}  {{$con->vacancy->name}}</h6>    
+                @endforeach
+                @endif
 	            @if(session()->get('user')->resumepath!=null)
 	             <h6>Resume:<a href="{{route('download-resume' , session()->get('user')->resumepath)}}">
 	             	 Downloads</a></h6>

@@ -17,7 +17,7 @@ class AdminController extends Controller{
     
 	
 	public function index(){
-		$request = Company::all();
+		$request = Requests::all();
 		$user= User::all();
 		$confirm = Confirm_Requests::all();
 		$vacancy=Vacancy::all();
