@@ -12,9 +12,10 @@ class Company extends Model
     protected $table = 'companies';
 
 
-    public function getVacancy(){
-    	return $this->belongsToMany('App\Models\Vacancy' , 'vacancies');
-    }
+    public function vacancies(){
+
+		return $this->hasMany(Vacancy::class);
+	}
 
     public function country(){
     	return $this->belongsTo('App\Models\Country');

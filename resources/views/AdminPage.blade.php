@@ -1,205 +1,110 @@
- 	@extends('Admin_layout.Admin_layout')
+ 	@extends('Admin_layout.newadmin_layout')
 
 @section('title')Admin Page @endsection
 
-@section('main_content') 
-<div class="container">
-	<hr class="my-4">
-	  <div class="container-fluid bg-light">
-	    <h2 style="padding: 30px 0 0 0">All Users</h2>
-	    <br>
-	    <table class="table table-striped ">
-	      <thead>
-	        <tr>
-	          <th scope="col">#</th>
-	          <th scope="col">NAME</th>
-	          <th scope="col">TELEPHONE</th>
-	          <th scope="col">E-email</th>
-	          <th scope="col">Details</th>
-	        </tr>
-	     	</thead>
-	     		<tbody>
-	     			@foreach($users as $user)
-		     		<tr>
-		     			<td>{{ $user->id }}</td>
-		     			<td>{{ $user->full_name }}</td>
-		     			<td>{{ $user->tel_number }}</td>
-		     			<td>{{ $user->email }}</td>
-		     			<td><a href="{{route('user_details' , $user->id )}}"  class="btn btn-primary btn-sm" >details</a></td>
-		     		</tr>
-		     		@endforeach
-	     		</tbody>
-	     	</table>
-	  </div>
+@section('main_content')
 
-	<hr class="my-4">
-	  <div class="container-fluid bg-light">
-		  <div class="col-md-12 align-items-center">
-		    <h2  style="padding: 30px 0 0 0">Vacancy</h2>
-		    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#basicExampleModal2">
-		  Add new
-		</button>
-		    </div>
-		    <br>
-		    <table class="table ">
-		  <thead>
-		    <tr>
-		      <th scope="col">#</th>
-		      <th scope="col">Name</th>
-		      <th scope="col">Requirements</th>
-		      <th scope="col">Salary</th>
-		      <th scope="col">Company</th>
-		    </tr>
-		  </thead>
-		  <tbody>
-		  		@foreach($vacancies as $vacancy)
-		  		<tr>
-	     			<td>{{$vacancy->id}}</td>
-	     			<td>{{$vacancy->name}}</td>
-	     			<td>{{$vacancy->requirement}}</td>
-	     			<td>{{$vacancy->salary}} KZT</td>
-	     			<td>{{$companies->find($vacancy->company_id)->company_name}}</td>
-		     	</tr>
-		     	@endforeach
-		  </tbody>
-		</table>
-	</div>
+<div class="container-fluid">
+	<div class="row mt-5">
 
-	<!-- Modal for Add vacancy -->
-	<div class="modal fade " id="basicExampleModal2" tabindex="-1" role="dialog" aria-labelledby="basicExampleModal2"
-	  aria-hidden="true">
-	  <div class="modal-dialog modal-lg" role="document">
-	    <div class="modal-content">
-	      <div class="modal-header ">
-	        <h5 class="modal-title" id="basicExampleModal2">Add new vacancy</h5>
-	        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-	          <span aria-hidden="true">&times;</span>
-	        </button>
-	      </div>
-	      <form method="post" action="{{ route('addvacancy') }}">
-		      <div class="modal-body">
-		      		@csrf
-	                <div class="form-group">
-	                  <label>Name</label>
-	                  <input type="text" class="form-control" name="vacancy_name">
-	                </div>
-	                <div class="form-group">
-	                  <label>Requirement</label>
-	                  
-	                    <textarea class="form-control" id="exampleFormControlTextarea1" name="requirement" rows="3"></textarea>
-	                </div>
-	              <div class="form-group">
-	                <label>Salary</label>
-	                <input type="number" class="form-control" name="salary">
-	              </div>
-	              <div class="form-group">
-				    <label for="exampleFormControlSelect1">Company</label>
-				    <select class="form-control" id="exampleFormControlSelect1" name="company_id">
-				    	@foreach($companies as $c)
-					      <option value="{{$c->id}}">{{$c->company_name}}</option>
-					      @endforeach
-				    </select>
-				  </div>
-	          </div>
-	      	  <div class="modal-footer">
-			        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-			        <button type="submit" class="btn btn-primary">Add</button>
-			  </div>
-	    </form>
-	    </div>
-	  </div>
-	</div>
+          <!-- Grid column -->
+          <div class="col-xl-3 col-md-6 mb-xl-0 mb-4">
 
-<hr class="my-4">
+            <!-- Card Primary -->
+            <div class="card classic-admin-card bg-primary">
+              <div class="card-body">
+                <div class="pull-right">
+                  <i class="far fa-money-bill-alt fa-2x"></i>
+                </div>
+                <p class="white-text mt-1" style="color: white">VACANCIES</p>
+                <h4 style="color: white">{{$vacancysize}}</h4>
 
-	<div class="bg-light">
-	  <div class="col-md-12 align-items-center">
-	    <h2 style="padding: 30px 0 0 0">Companies</h2>
-	    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#basicExampleModal">
-	  		+ ADD NEW
-		</button>
-	    </div>
-		 @if($errors->any())
-		    	<div class="alert alert-danger" >
-		    		<ul>
-		    			@foreach($errors->all() as $error)
-		    				<li>{{$error}}</li>
-		    			@endforeach
-		    		</ul>
-		    	</div>
-		    @endif
-	    <!-- Modal for Add Companies -->
-	<div class="modal fade " id="basicExampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
-	  aria-hidden="true">
-	  <div class="modal-dialog modal-lg" role="document">
-	    <div class="modal-content">
-	      <div class="modal-header ">
-	        <h5 class="modal-title" id="exampleModalLabel">Add new company</h5>
-	        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-	          <span aria-hidden="true">&times;</span>
-	        </button>
-	      </div>
-	      <form method="post" action="{{ route('addcompany') }}">
-		      <div class="modal-body">
-		      		@csrf
-	                <div class="form-group">
-	                  <label>Name</label>
-	                  <input type="text" class="form-control" name="companyName">
-	                </div>
-	                <div class="form-group">
-	                  <label>Address</label>
-	                    <input type="text" class="form-control" name="address_company">
-	                </div>
-	              <div class="form-group">
-	                <label>City</label>
-	                <input type="text" class="form-control" name="city">
-	              </div>
-	              <div class="form-group">
-	                <label>Email</label>
-	                <input type="email" class="form-control" name="email">
-	              </div>
-	          </div>
-	      	  <div class="modal-footer">
-			        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-			        <button type="submit" class="btn btn-primary">Add</button>
-			  </div>
-	    </form>
-	    </div>
-	  </div>
-	</div>
+              </div>
+              <div class="progress">
+                <div class="progress-bar bg-secondary" role="progressbar"  style="width:{{$vacancysize}}%" aria-valuenow="55" aria-valuemin="0" aria-valuemax="100"></div>
+              </div>
+              <div class="card-body">
+                 <p style="color: white">Average salary: {{intval($avaragesalary)}} KZT</p>
+              </div>
+            </div>
+            <!-- Card Primary -->
 
-	    <br>
-	    @if ($message = Session::get('success'))
-		<div class="alert alert-success alert-block">
-		    <button type="button" class="close" data-dismiss="alert">×</button>    
-		    <strong>{{ $message }}</strong>
-		</div>
-		@endif
-	    <table class="table">
-		  <thead>
-		    <tr>
-		      <th scope="col">#</th>
-		      <th scope="col">Name</th>
-		      <th scope="col">Address</th>
-		      <th scope="col">City</th>
-		      <th scope="col">Email</th>
-		      <th scope="col">Operations</th>
-		    </tr>
-		  </thead>
-		  <tbody>
-		  	 @foreach($companies as $company)
-		  		<tr>
-	     			<td>{{ $company->id }}</td>
-	     			<td>{{ $company->company_name }}</td>
-	     			<td>{{ $company->company_address }}</td>
-	     			<td>{{ $company->company_city }}</td>
-	     			<td>{{ $company->email }}</td>
-	     			<td><a href="{{route('Edit-Company' , $company->id )}}" class="btn btn-warning btn-sm" >Edit</a></td>
-		     	</tr>
-		     @endforeach
-		  </tbody>
-	</table>
-</div>
+          </div>
+          <!-- Grid column -->
+
+          <!-- Grid column -->
+          <div class="col-xl-3 col-md-6 mb-xl-0 mb-4">
+
+            <!-- Card Yellow -->
+            <div class="card classic-admin-card bg-warning">
+              <div class="card-body">
+                <div class="pull-right">
+                  <i class="fas fa-chart-line fa-2x"></i>
+                </div>
+                <p class="white-text mt-1" style="color: white">SUBSCRIPTIONS</p>
+                <h4 style="color: white">{{$usersize}}</h4>
+              </div>
+              <div class="progress">
+                <div class="progress-bar bg grey darken-3" role="progressbar" style="width:{{$usersize}}%" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
+              </div>
+              <div class="card-body">
+               	<p style="color: white">All users</p>
+              </div>
+            </div>
+            <!-- Card Yellow -->
+
+          </div>
+          <!-- Grid column -->
+
+          <!-- Grid column -->
+          <div class="col-xl-3 col-md-6 mb-md-0 mb-4">
+
+            <!-- Card Blue -->
+            <div class="card classic-admin-card bg-success">
+              <div class="card-body">
+                <div class="pull-right">
+                  <i class="fas fa-chart-pie fa-2x"></i>
+                </div>
+                <p class="white-text mt-1" style="color: white">EMPLOYEE</p>
+                <h4 style="color: white">{{$confirmsize}}</h4>
+              </div>
+              <div class="progress">
+                <div class="progress-bar bg grey darken-4" role="progressbar" style="width:{{$confirmsize}}%" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100"></div>
+              </div>
+              <div class="card-body">
+               	<p style="color: white">Employee</p>
+              </div>
+            </div>
+            <!-- Card Blue -->
+
+          </div>
+          <!-- Grid column -->
+
+          <!-- Grid column -->
+          <div class="col-xl-3 col-md-6 mb-0">
+
+            <!-- Card Red -->
+            <div class="card classic-admin-card bg-danger accent-2">
+              <div class="card-body">
+                <div class="pull-right">
+                  <i class="fas fa-chart-bar fa-2x"></i>
+                </div>
+                <p class="white-text mt-1" style="color: white ">JOB APPLICANTS</p>
+                <h4 style="color: white">{{$requestsize}}</h4>
+              </div>
+              <div class="progress">
+                <div class="progress-bar bg grey darken-4" role="progressbar" style="width: {{$requestsize}}%" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
+              </div>
+              <div class="card-body">
+               	<p style="color: white">job applicants</p>
+              </div>
+            </div>
+            <!-- Card Red -->
+
+          </div>
+          <!-- Grid column -->
+
+        </div>
 </div>
 @endsection
 

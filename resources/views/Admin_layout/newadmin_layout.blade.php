@@ -11,9 +11,15 @@
 </head>
 <body>
 	@include('inc.navbar')
+	<div class="row">
+		
+		<div class="col-md-2">@include('inc.sitebar')</div>
+		<div class="col-md-10">
+		
 
 		@yield('main_content')
-		
+		</div>
+	</div>
 	@include('inc.footer')
 
 </body>

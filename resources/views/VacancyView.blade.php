@@ -84,14 +84,31 @@
                 </div>
 	             @endif
                  <br>
+                 @if($vcategories!=null)
                  <h3>Categories</h3>
-                 @foreach($vcategories as $category)
-                    <span class="badge badge-pill badge-warning">{{$category->category->name}}</span>
-                 @endforeach
+                     @foreach($vcategories as $category)
+                        <span class="badge badge-pill badge-warning">{{$category->category->name}}</span>
+                     @endforeach
+                 @endif
 	            <br>
                 <br>
+
             @if(session()->get('user')!=null)
-           <a href="#" class="btn btn-primary btn-sm" >Subscribe</a>
+                @if(!$requests_vacancies->contains('user_id' ,session()->get('user')->id) && 
+                !$confirm->contains('user_id' ,session()->get('user')->id))
+                    <form action="{{route('subscribe-vacancy' , $vacancy->id )}}" method="post" >
+                         @csrf
+                        <input type="hidden" name="name" value="1">
+                       <button  type="submit" class="btn btn-info" >Subscribe</button>
+                   </form>
+               @endif
+               @if($requests_vacancies->contains('user_id',session()->get('user')->id))
+                    <form action="{{route('unsubscribe-vacancy' , $vacancy->id )}}" method="post" >
+                     @csrf
+                    <input type="hidden" name="name" value="1">
+                   <button  type="submit" class="btn btn-danger" >Cancel</button>
+               </form>
+               @endif
            @endif
         </div>
 	</div>

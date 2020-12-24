@@ -34,6 +34,7 @@ class UserAuthController extends Controller
             return redirect('admin'); 
         }
         if($data){
+            $error="login";
             if($pas){    
                 session(['user' => $user]);
                 return redirect()->route('ProfilePage');  
@@ -42,7 +43,7 @@ class UserAuthController extends Controller
             }	
         } 
         else{
-            return view('Registration');
+            return redirect()->route('Loginin','error=loginorpassword');
         }                                       
     }
 
@@ -94,4 +95,6 @@ class UserAuthController extends Controller
     public function downloadresume($resume){
         return response()->download('storage/uploads/'.$resume);
     }
+
+    
 }

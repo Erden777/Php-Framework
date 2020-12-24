@@ -16,6 +16,6 @@ class Vacancy extends Model
     }
 
      public function category(){
-        return $this->belongsToMany('App\Models\VacancyCategory');
+        return $this->hasMany('App\Models\VacancyCategory');
     }
 }

@@ -8,6 +8,16 @@
 
 <div class="container">
 	<hr>
+	@if(request()->get('error'))
+	
+		<div class="alert alert-danger alert-dismissible fade show" role="alert">
+		  <strong class="text-center">Incorrect!</strong> password or login
+		  <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+		    <span aria-hidden="true">&times;</span>
+		  </button>
+		</div>
+	@endif
+
 	<div class="card bg-light">
 		<article class="card-body mx-auto" style="max-width: 400px;">
 			<h4 class="card-title mt-3 text-center">Login in</h4>

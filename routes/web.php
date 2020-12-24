@@ -7,6 +7,7 @@ use App\Http\Controllers\CompanyController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\VacancyController;
 use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\RequestVacancyController;
 use App\Models\JobCategory;
 
 use Illuminate\Http\Request;
@@ -162,3 +163,31 @@ Route::get('create/vacancy' ,
 Route::get('/vacancy/view/{id}' , 
 	[VacancyController::class  ,'vacancy_view']
 )->name('vacancy_view');
+
+Route::post('/vacancy/request/{id}' ,
+	[RequestVacancyController::class , 'subscribeVacancy'
+])->name('subscribe-vacancy');
+
+Route::post('/vacancy/Unsubscribe/{id}' ,
+	[RequestVacancyController::class , 'UnsubscribeVacancy'
+])->name('unsubscribe-vacancy');
+
+Route::get('request/users',
+	 [RequestVacancyController::class , 'requestUsers'
+])->name('requestUsers');
+
+Route::post('request/tohire' , [RequestVacancyController::class , 'toHire'])->name('tohire');
+Route::post('request/reject' , [RequestVacancyController::class , 'RejectRequest'])->name('rejectrequests');
+
+Route::post('findjob/search' , [VacancyController::class  , 'SearchJob'])->name('search-job');
+
+Route::get('findjob/bydate' , [VacancyController::class  , 'byDate'])->name('by-date');
+Route::get('findjob/bysalary' , [VacancyController::class  , 'bySalary'])->name('by-salary');
+
+Route::get('byCountry/{id}' , [VacancyController::class  , 'SearchBycountry'])->name('by-country');
+
+Route::get('viewallUsers'  ,[AdminController::class , 'allUsers'])->name('viewallUsers');
+Route::get('viewallVacancy'  ,[AdminController::class , 'allvacancies'])->name('allvacancies');
+Route::get('viewallComapnies' , [AdminController::class , 'allcompanies'])->name('allcompanies');
+Route::get('viewallEmployee' , [AdminController::class  , 'allemployeers'])->name('allemployeers');
+Route::get('viewallRequests' , [Admincontroller::class , 'allrequests'])->name('allrequests');

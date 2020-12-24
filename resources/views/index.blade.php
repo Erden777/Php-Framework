@@ -45,16 +45,25 @@
 		@endif
 		
 		@if(session()->get('company')!=null)
-		<li class="nav-item">
-			 <a class="nav-link btn btn-outline-info" href="{{route('create-Vacancy')}}">Add Vacancy</a>
-		</li>
-		<li class="nav-item">
-			 <a class="nav-link" href="{{route('Company-Profile')}}">{{session()->get('company')->company_name }}</a>
-			 
-		</li>
-		<li class="nav-item">
-			<a  class="nav-link"  href="{{route('Logout')}}">Logout </a>
-		</li>
+		<div class="dropdown">
+		<a class="nav-link dropdown-toggle" href="{{route('Company-Profile')}}" id="navbarDropdown1" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> 
+           {{session()->get('company')->company_name }}
+           @if(count($sum)!=0)
+           <span>({{count($sum)}})</span>
+           @endif
+          </a>
+          <div class="dropdown-menu right" aria-labelledby="navbarDropdown1">
+          	<a class="dropdown-item"  href="{{route('Company-Profile')}}">Profile</a>
+            <a class="dropdown-item"  href="{{route('create-Vacancy')}}">Add Vacancy</a>
+          	
+            <a class="dropdown-item"  href="{{route('requestUsers')}}">Show all
+            @if(count($sum)!=0)({{count($sum)}})@endif </a>
+          	<br>
+          	
+            <div class="dropdown-divider"></div>
+            <a class="dropdown-item danger" href="{{route('Logout')}}">Logout</a>
+          </div>
+      </div>
 
 		@endif
  
@@ -249,7 +258,7 @@
 		 			<div class="col-md-6">
 		 				<ul class="list-group list-group-flush">
 		 				@for($i=0 ; $i< 9; $i++)
-						  <li class="list-group-item"><a href="#">{{ $countries[$i]->name}}</a></li>
+						  <li class="list-group-item"><a href="{{route('by-country' , $countries[$i]->id)}}" name="country_id">{{ $countries[$i]->name}}</a></li>
 						   @endfor  
 						</ul>
 		 			</div>
@@ -259,7 +268,7 @@
 		 				<ul class="list-group list-group-flush">
 		 				@if(count($countries)>9)
 		 					@for($i = 9 ; $i< count($countries) ; $i++ )
-						  		<li class="list-group-item"><a href="#">{{ $countries[$i]->name}}</a></li>
+						  		<li class="list-group-item"><a href="{{route('by-country' , $countries[$i]->id)}}">{{ $countries[$i]->name}}</a></li>
 						  	 @endfor  
 						  @endif
 						</ul>

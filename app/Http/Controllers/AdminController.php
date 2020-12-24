@@ -9,21 +9,63 @@ use App\Http\Requests\AdminRequest;
 use App\Models\User;
 use App\Models\Company;
 use App\Models\Vacancy;
+use App\Models\Requests;
+use App\Models\Confirm_Requests;
 use routes\web;	
 
 class AdminController extends Controller{
     
 	
 	public function index(){
-		$company = new Company;
+		$request = Company::all();
+		$user= User::all();
+		$confirm = Confirm_Requests::all();
+		$vacancy=Vacancy::all();
+		$sum =0 ;
+		foreach ($vacancy as $key) {
+			$sum+=$key->salary;
+		}
+
+		return view('AdminPage' , ['usersize'=>count($user) , 
+			'confirmsize'=>count($confirm) , 
+			'vacancysize'=>count($vacancy) , 
+			'requestsize'=>count($request),
+			'avaragesalary'=>($sum/count($vacancy))]);
+	}
+
+
+	public function allUsers(){
 		$user= new User;
-		$vacancy=new Vacancy;
-		return view('AdminPage' , ['users'=>$user->all() , 'companies'=>$company->all() , 'vacancies'=>$vacancy->all()]);
+		return view('/AdminPages/users' , ['users'=>$user->all()]);
+	}
+
+
+	public function allcompanies(){
+		$company = new Company;
+		return view('/AdminPages/companies' , ['companies'=>$company->all()]);	
+	}
+
+	public function allvacancies(){
+		$company = new Company;
+		$vacancy = new Vacancy;
+		return view('/AdminPages/vacancies' , ['vacancies'=>$vacancy->all() , 
+	 'companies'=>$company->all()]);
 	}
 
 	public function detailsUser($id){
 		$user= new User;
 		return view('detailsUser' , ['user'=>$user->find($id)]);
+	}
+
+
+	public function allemployeers(){
+		$employee = new Confirm_Requests;
+		return view('/AdminPages/confirm_requests' , ['employee'=>$employee->all()]);
+	}
+
+	public function allrequests(){
+		$requests = new Requests;
+		return view('/AdminPages/requests' , ['requests'=>$requests->all()]);
 	}
 
 	//Vacancy functions
